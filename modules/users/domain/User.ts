@@ -8,12 +8,22 @@ export interface InitializeUserParams {
   country: string;
 }
 
+export interface UpdateUserParams {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  country: string;
+  phone: number;
+  postalCode: number;
+}
+
 export class User {
   private password: string;
   constructor(
     private name: string,
     private surname: string,
-    private email: string,
+    public email: string,
     password: string,
     private country: string,
     private phone?: string,
