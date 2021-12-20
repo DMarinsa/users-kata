@@ -29,8 +29,7 @@ export class User {
     private phone?: string,
     private postalCode?: string,
   ) {
-    const salt = bcrypt.genSaltSync(5);
-    this.password = bcrypt.hashSync(password, salt);
+    this.password = this.hashPassword(password);
   }
 
   static create(params: InitializeUserParams) {
@@ -41,5 +40,10 @@ export class User {
       params.password,
       params.country
     );
+  }
+
+  private hashPassword(password: string): string {
+    const salt = bcrypt.genSaltSync(5);
+    return bcrypt.hashSync(password, salt);
   }
 }
