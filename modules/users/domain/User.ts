@@ -46,4 +46,16 @@ export class User {
     const salt = bcrypt.genSaltSync(5);
     return bcrypt.hashSync(password, salt);
   }
+
+  serialize() {
+    return {
+      name: this.name,
+      surname: this.surname,
+      email: this.email,
+      password: this.password,
+      country: this.country,
+      phone: this.phone,
+      postalCode: this.postalCode,
+    }
+  }
 }
