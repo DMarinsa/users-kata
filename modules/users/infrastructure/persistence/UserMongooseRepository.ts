@@ -11,7 +11,7 @@ export class UserMongooseRepository implements UserRepository {
     return this.model.create(user);
   }
   
-  async updateOne(user: User): Promise<User> {
+  async updateOne(user: User): Promise<User | null> {
     const options = {
       new: true,
     };
