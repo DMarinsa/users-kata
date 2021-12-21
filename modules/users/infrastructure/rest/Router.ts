@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction, Application } from "express";
 import { Controller } from "../../../shared/domain/Controller";
+import logger, { Logger } from "../../../shared/infrastructure/logger/Logger";
 import { CreateUserUseCase } from "../../application/CreateUserUseCase";
 import { InitializeUserParams } from "../../domain/User";
 import { UserRepository } from "../../domain/UserRepository";
@@ -12,7 +13,9 @@ export class Router implements Controller {
 
   private userRepository: UserRepository;
   private createUserUseCase: CreateUserUseCase;
+  private logger: Logger;
   constructor() {
+    this.logger = logger;
     this.userRepository = new UserMongooseRepository(UserModel);
     this.createUserUseCase = new CreateUserUseCase(this.userRepository);
   }
@@ -23,8 +26,13 @@ export class Router implements Controller {
   }
 
   private async post(req: Request, res: Response) {
-    const request = req.body as InitializeUserParams;
-    const createdUser = await this.createUserUseCase.execute(request);
-    return res.status(200).json(createdUser);
+    this.logger.info('POST /users');
+    try {
+      const request = req.body as InitializeUserParams;
+      const createdUser = await this.createUserUseCase.execute(request);
+      return res.status(200).json(createdUser);
+    } catch (error) {
+      this.logger.error(error as string);
+    }
   }
 }
