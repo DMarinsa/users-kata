@@ -5,7 +5,7 @@ const config: Config.InitialOptions = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   testMatch: [
-    '**/**/*unit.ts',
+    '**/**/*test.ts',
   ],
   verbose: true,
 };
