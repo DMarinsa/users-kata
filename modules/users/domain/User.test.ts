@@ -1,19 +1,5 @@
+import { userRequestFactory } from "../../../test/mocks/UserRepositoryMock";
 import { User } from "./User";
-
-function userRequestFactory(user?: Partial<User>) {
-  const DEFAULT_DATA = {
-    name: 'someName',
-    surname: 'someSurname',
-    email: 'someEmail@email.com',
-    password: 'somePassword',
-    country: 'someCountry',
-  };
-
-  return {
-    ...user,
-    ...DEFAULT_DATA,
-  }
-}
 
 describe('User', () => {
   it('should create a User', () => {
