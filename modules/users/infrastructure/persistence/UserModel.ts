@@ -23,4 +23,4 @@ export interface UserDocument extends Document, User{
   _id: Id;
 }
 
-export const UserModel = model<UserDocument>('BotConfiguration', UserSchema);
+export const UserModel = model<UserDocument>('User', UserSchema);
